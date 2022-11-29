@@ -60,6 +60,7 @@ export default function NFTPage(props) {
         signer
       );
       console.log(signer);
+      // console.log(tokenId);
       const salePrice = ethers.utils.parseUnits(data.price, "ether");
       updateMessage("Buying the NFT... Please Wait (Upto 5 mins)");
       //run the executeSale function
@@ -97,7 +98,7 @@ export default function NFTPage(props) {
             Seller: <span className="text-sm">{data.seller}</span>
           </div>
           <div>
-            {currAddress == data.owner || currAddress == data.seller ? (
+            {/* {currAddress == data.owner || currAddress == data.seller ? (
               <button
                 className="enableEthereumButton bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm"
                 onClick={() => buyNFT(tokenId)}
@@ -107,6 +108,23 @@ export default function NFTPage(props) {
             ) : (
               <div className="text-emerald-700">
                 You are the owner of this NFT
+              </div>
+            )} */}
+
+            {!(currAddress == data.owner || currAddress == data.seller) ? (
+              <button
+                className="enableEthereumButton bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm"
+                onClick={() => buyNFT(tokenId)}
+              >
+                Buy this NFT
+              </button>
+            ) : currAddress == data.owner ? (
+              <div className="text-emerald-700">
+                You are the owner of this NFT
+              </div>
+            ) : (
+              <div className="text-emerald-700">
+                You are the seller of this NFT
               </div>
             )}
 
